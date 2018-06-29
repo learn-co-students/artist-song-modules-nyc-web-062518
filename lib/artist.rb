@@ -13,17 +13,27 @@ class Artist
   attr_accessor :name
   attr_reader :songs
 
-  @@all = []
-
-  # def self.find_by_name(name)
-  #   @@all.detect{|a| a.name == name}
-  # end
-
   def initialize(name='')
     @name = name
     @songs = []
     self.class.all << self
   end
+
+  def add_song(song)
+    @songs << song
+    song.artist = self
+  end
+
+  def add_songs(songs)
+    songs.each { |song| add_song(song) }
+  end
+
+end
+
+
+  # def self.find_by_name(name)
+  #   @@all.detect{|a| a.name == name}
+  # end
 
   # def self.all
   #   @@all
@@ -37,17 +47,6 @@ class Artist
   #   @@all.count
   # end
 
-  def add_song(song)
-    @songs << song
-    song.artist = self
-  end
-
-  def add_songs(songs)
-    songs.each { |song| add_song(song) }
-  end
-
   # def to_param
   #   name.downcase.gsub(' ', '-')
   # end
-
-end
